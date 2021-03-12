@@ -32,10 +32,12 @@ class NetworkTopListMoviesImpl @Inject constructor(val mService: IAPIMovie) {
 
                     override fun onSuccess(t: MovieJSONResponse?) {
                        Log.d("OVM", "Success -> ${t?.results}")
+                        _mList.postValue(t?.results)
                     }
 
                     override fun onError(e: Throwable?) {
                         Log.d("OVM", "Success -> ${e?.message}")
+
                     }
                 })
         )

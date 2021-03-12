@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyAppRappTest</string>
+    <string name="item_default_titulo">Interstellar</string>
+    <string name="item_default_date_release">2014</string>
 </resources>
