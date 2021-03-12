@@ -1,4 +1,4 @@
-package com.example.myapprapptest.network
+package com.example.myapprapptest.repository.network
 
 object ConstantServer {
     const val URL_BASE = "https://api.themoviedb.org/3/"

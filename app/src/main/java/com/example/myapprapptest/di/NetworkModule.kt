@@ -1,7 +1,7 @@
 package com.example.myapprapptest.di
 
-import com.example.myapprapptest.network.ConstantServer
-import com.example.myapprapptest.network.IAPIMovie
+import com.example.myapprapptest.repository.network.ConstantServer
+import com.example.myapprapptest.repository.network.IAPIMovie
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
 import dagger.Module
 import dagger.Provides

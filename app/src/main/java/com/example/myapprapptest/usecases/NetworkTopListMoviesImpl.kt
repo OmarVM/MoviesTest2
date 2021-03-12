@@ -5,8 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.models.MovieJSONResponse
-import com.example.myapprapptest.network.ConstantServer
-import com.example.myapprapptest.network.IAPIMovie
+import com.example.myapprapptest.repository.network.ConstantServer
+import com.example.myapprapptest.repository.network.IAPIMovie
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver

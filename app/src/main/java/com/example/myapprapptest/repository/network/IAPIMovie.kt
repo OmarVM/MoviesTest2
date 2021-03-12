@@ -1,4 +1,4 @@
-package com.example.myapprapptest.network
+package com.example.myapprapptest.repository.network
 
 import com.example.myapprapptest.models.MovieJSONResponse
 import io.reactivex.rxjava3.core.Single

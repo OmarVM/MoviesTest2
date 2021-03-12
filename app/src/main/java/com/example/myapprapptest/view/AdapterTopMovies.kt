@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapprapptest.R
 import com.example.myapprapptest.models.Movie
-import com.example.myapprapptest.network.ConstantServer
+import com.example.myapprapptest.repository.network.ConstantServer
 import com.squareup.picasso.Picasso
 
 class AdapterTopMovies (var mList: ArrayList<Movie>): RecyclerView.Adapter<AdapterTopMovies.TopMoviesHolder>() {
