@@ -2,6 +2,7 @@ package com.example.myapprapptest
 
 import android.app.Application
 import com.example.myapprapptest.di.AppComponent
+import com.example.myapprapptest.di.AppModule
 import com.example.myapprapptest.di.DaggerAppComponent
 
 class BaseApplication : Application(){
@@ -16,7 +17,9 @@ class BaseApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
-        appComponent = DaggerAppComponent.create()
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
 
     }
 }

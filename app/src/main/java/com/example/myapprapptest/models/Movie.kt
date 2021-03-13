@@ -1,5 +1,9 @@
 package com.example.myapprapptest.models
 
+import androidx.room.Entity
+import com.example.myapprapptest.utils.Constants
+
+@Entity(tableName = Constants.TABLE_NAME_MOVIES)
 data class Movie(
     var id: Int,
     var vote_average: Double,
