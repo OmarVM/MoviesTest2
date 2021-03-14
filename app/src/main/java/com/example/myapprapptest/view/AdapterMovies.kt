@@ -11,7 +11,7 @@ import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.repository.network.ConstantServer
 import com.squareup.picasso.Picasso
 
-class AdapterTopMovies (var mList: ArrayList<Movie>): RecyclerView.Adapter<AdapterTopMovies.TopMoviesHolder>() {
+class AdapterMovies (var mList: ArrayList<Movie>): RecyclerView.Adapter<AdapterMovies.TopMoviesHolder>() {
 
     fun updateList(newList: List<Movie>){
         mList.clear()

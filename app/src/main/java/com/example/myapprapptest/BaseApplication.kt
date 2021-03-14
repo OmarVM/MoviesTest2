@@ -10,7 +10,7 @@ class BaseApplication : Application(){
     companion object{
         private lateinit var appComponent:AppComponent
 
-        fun getAppCcomponent(): AppComponent{
+        fun getAppComponent(): AppComponent{
             return appComponent
         }
     }

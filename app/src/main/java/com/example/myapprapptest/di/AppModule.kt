@@ -5,6 +5,7 @@ import android.content.Context
 import com.example.myapprapptest.repository.RepositoryMovie
 import com.example.myapprapptest.repository.database.DaoMovies
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
+import com.example.myapprapptest.view.AdapterMovies
 import dagger.Module
 import dagger.Provides
 
@@ -19,5 +20,12 @@ class AppModule constructor(private val mApplication: Application) {
     @Provides
     fun getRepository(dao: DaoMovies, serviceTopMovies: NetworkTopListMoviesImpl) : RepositoryMovie {
         return RepositoryMovie(dao, serviceTopMovies)
+    }
+
+    //Views
+
+    @Provides
+    fun getApdaterMovies(): AdapterMovies {
+        return AdapterMovies(arrayListOf())
     }
 }

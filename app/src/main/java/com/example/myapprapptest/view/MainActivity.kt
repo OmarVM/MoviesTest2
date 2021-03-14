@@ -8,18 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapprapptest.BaseApplication
 import com.example.myapprapptest.R
 import com.example.myapprapptest.viewmodel.ViewModelMovies
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var mViewModelMovies: ViewModelMovies
 
-    var adapterTopMovies = AdapterTopMovies(arrayListOf())
+    @Inject
+    lateinit var adapterTopMovies: AdapterMovies
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mViewModelMovies = ViewModelProvider(this).get(ViewModelMovies::class.java)
-        BaseApplication.getAppCcomponent().inject(mViewModelMovies)
+        BaseApplication.getAppComponent().inject(mViewModelMovies)
+        BaseApplication.getAppComponent().inject(this)
 
         var recyclerViewTopMovies = findViewById<RecyclerView>(R.id.rv_adapter_top_movies)
         recyclerViewTopMovies.setHasFixedSize(true)
