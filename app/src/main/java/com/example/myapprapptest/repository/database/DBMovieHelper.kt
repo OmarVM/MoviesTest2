@@ -4,10 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.myapprapptest.models.DataConverterHelper
 import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.utils.Constants
 
 @Database(entities = [Movie::class], version = Constants.DB_MOVIES_VERSION)
+@TypeConverters(DataConverterHelper::class)
 abstract class DBMovieHelper : RoomDatabase() {
 
     abstract fun daoItem() : DaoMovies
