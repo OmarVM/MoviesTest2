@@ -17,7 +17,9 @@ class ViewModelSearch : ViewModel() {
 
     fun getData(){
         val getData = viewModelScope.launch(Dispatchers.IO) {
-            mListMoviesLD.postValue(getAllMovies.getTopMoviesRepo())
+            if (getAllMovies.getAllMoviesCache().isNotEmpty()){
+                mListMoviesLD.postValue(getAllMovies.getAllMoviesCache())
+            }
         }
     }
 

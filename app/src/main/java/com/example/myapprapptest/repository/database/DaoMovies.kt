@@ -18,4 +18,7 @@ interface DaoMovies {
 
     @Query("SELECT * FROM ${Constants.TABLE_NAME_MOVIES} WHERE popular == 1")
     suspend fun getPopularMovies() : List<Movie>
+
+    @Query("SELECT * FROM ${Constants.TABLE_NAME_MOVIES}")
+    suspend fun getAllContent() : List<Movie>
 }

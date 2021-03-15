@@ -12,6 +12,14 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
                                           private val serviceTopMovies: NetworkTopListMoviesImpl,
                                           private val servicePopularMovies: NetworkPopularListMoviesImpl) : ICallbackNetworkOperation{
 
+    suspend fun getAllMoviesCache(): List<Movie>{
+        if (mDao.getAllContent().isNotEmpty()){
+            Log.d("OVM", "All movies fromDB")
+            return mDao.getAllContent()
+        }
+        return arrayListOf()
+    }
+
     suspend fun getTopMoviesRepo(): List<Movie>{
         if (mDao.getTopMovies().isNotEmpty()){
             Log.d("OVM", "fromDB")
