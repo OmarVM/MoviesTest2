@@ -1,5 +1,15 @@
 <resources>
-    <string name="app_name">MyAppRappTest</string>
+    <string name="app_name">My Movies App</string>
+
+
+    <!-- Item Default -->
     <string name="item_default_titulo">Interstellar</string>
     <string name="item_default_date_release">2014</string>
+    <string name="item_default_overview">La historia sigue a Carol Danvers mientras se convierte en uno de los héroes
+        más poderosos del universo, cuando la Tierra se encuentra atrapada en medio de una guerra galáctica entre dos
+        razas alienígenas. Situada en los años 90, \'Capitana Marvel\' es una historia nueva de un período de tiempo
+        nunca antes visto en la historia del Universo Cinematográfico de Marvel.
+    </string>
+    <string name="item_default_average_vote">7.8</string>
+    <string name="layout_details_activity_overview">OVERVIEW</string>
 </resources>
