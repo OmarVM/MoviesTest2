@@ -26,11 +26,5 @@ class DetailsActivity : AppCompatActivity() {
         details_date_release.text = date_release
         Picasso.get().load(ConstantServer.BASE_URL_IMG_W185 + img_url).into(details_img)
         details_overview.text = overview
-
-
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
     }
 }

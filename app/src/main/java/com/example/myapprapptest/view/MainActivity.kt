@@ -10,6 +10,7 @@ import com.example.myapprapptest.BaseApplication
 import com.example.myapprapptest.R
 import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.viewmodel.ViewModelMovies
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), IOnClickListener {
@@ -31,6 +32,12 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
         recyclerViewTopMovies.setHasFixedSize(true)
         recyclerViewTopMovies.adapter = adapterTopMovies
         recyclerViewTopMovies.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+
+        fab_search.setOnClickListener {
+            val searchActivity = Intent(this, SearchActivity::class.java)
+            startActivity(searchActivity)
+        }
+
     }
 
     override fun onClick(movie: Movie) {
@@ -45,7 +52,6 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
 
     override fun onResume() {
         super.onResume()
-
         mViewModelMovies.getData()
         mViewModelMovies.mListTop.observe(this, { listTopMovies ->
             adapterTopMovies.updateList(listTopMovies)
