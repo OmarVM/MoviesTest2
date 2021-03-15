@@ -16,4 +16,7 @@
     <!-- Search Activity -->
     <string name="action_search">Search</string>
     <string name="hint_search">Ej. action, drama, love, romantic...</string>
+
+    <string name="list_popular">POPULAR</string>
+    <string name="list_top_rated">TOP RATED</string>
 </resources>

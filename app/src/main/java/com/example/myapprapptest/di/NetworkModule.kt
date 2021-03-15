@@ -2,6 +2,7 @@ package com.example.myapprapptest.di
 
 import com.example.myapprapptest.repository.network.ConstantServer
 import com.example.myapprapptest.repository.network.IAPIMovie
+import com.example.myapprapptest.usecases.NetworkPopularListMoviesImpl
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
 import dagger.Module
 import dagger.Provides
@@ -33,5 +34,11 @@ class NetworkModule {
     @Singleton
     fun getTopListMoviesFromNetwork(api: IAPIMovie): NetworkTopListMoviesImpl {
         return NetworkTopListMoviesImpl(api)
+    }
+
+    @Provides
+    @Singleton
+    fun getPopMoviesFromNetwork(api: IAPIMovie) : NetworkPopularListMoviesImpl{
+        return NetworkPopularListMoviesImpl(api)
     }
 }

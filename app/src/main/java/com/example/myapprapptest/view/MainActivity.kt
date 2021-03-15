@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
 
     @Inject
     lateinit var adapterTopMovies: AdapterMovies
+    @Inject
+    lateinit var adapterPopMovies: AdapterMovies
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,11 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
         recyclerViewTopMovies.setHasFixedSize(true)
         recyclerViewTopMovies.adapter = adapterTopMovies
         recyclerViewTopMovies.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
+
+        adapterPopMovies.setClickListener(this)
+        rv_adapter_pop_movies.setHasFixedSize(true)
+        rv_adapter_pop_movies.adapter = adapterPopMovies
+        rv_adapter_pop_movies.layoutManager = LinearLayoutManager(applicationContext, LinearLayoutManager.HORIZONTAL, false)
 
         fab_search.setOnClickListener {
             val searchActivity = Intent(this, SearchActivity::class.java)
@@ -55,6 +62,11 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
         mViewModelMovies.getData()
         mViewModelMovies.mListTop.observe(this, { listTopMovies ->
             adapterTopMovies.updateList(listTopMovies)
+        })
+
+        mViewModelMovies.getDataPopular()
+        mViewModelMovies.mListPop.observe(this, { listPopMovies ->
+            adapterPopMovies.updateList(listPopMovies)
         })
     }
 }

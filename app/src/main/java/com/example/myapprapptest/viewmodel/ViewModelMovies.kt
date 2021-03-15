@@ -13,11 +13,19 @@ class ViewModelMovies : ViewModel() {
 
     @Inject
     lateinit var getTopMovies: RepositoryMovie
+
     var mListTop =  MutableLiveData<List<Movie>>()
+    var mListPop = MutableLiveData<List<Movie>>()
 
     fun getData(){
         val getData = viewModelScope.launch(Dispatchers.IO) {
             mListTop.postValue(getTopMovies.getTopMoviesRepo())
+        }
+    }
+
+    fun getDataPopular(){
+        val getData = viewModelScope.launch(Dispatchers.IO) {
+            mListPop.postValue(getTopMovies.getPopularMoviesRepo())
         }
     }
 }

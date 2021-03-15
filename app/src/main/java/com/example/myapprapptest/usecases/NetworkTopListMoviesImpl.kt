@@ -30,11 +30,10 @@ class NetworkTopListMoviesImpl @Inject constructor(private val mService: IAPIMov
                 ConstantServer.API
             )
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<MovieJSONResponse>() {
 
                     override fun onSuccess(t: MovieJSONResponse?) {
-                       Log.d("OVM", "Network Success -> ${t?.results}")
+                       Log.d("OVM", "Network Top Success -> ${t?.results}")
                         t?.results?.let { it ->
                             _mList.addAll(it)
                             it.onEach {
