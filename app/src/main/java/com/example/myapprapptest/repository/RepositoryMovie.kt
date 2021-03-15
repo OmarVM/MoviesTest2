@@ -5,6 +5,8 @@ import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.repository.database.DaoMovies
 import com.example.myapprapptest.usecases.NetworkPopularListMoviesImpl
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
@@ -32,8 +34,10 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
     override fun requestSuccess(movies: List<Movie>) {
         movies.let {
             runBlocking {
-                val insertResult = mDao.insertMovie(it)
-                Log.d("OVM", "Value Saved : ${insertResult.size}")
+                launch(Dispatchers.IO) {
+                    val insertResult = mDao.insertMovie(it)
+                    Log.d("OVM", "Value Saved : ${insertResult.size}")
+                }
             }
         }
     }
@@ -55,13 +59,20 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
     override fun requestSuccessPopular(movies: List<Movie>) {
         movies.let {
             runBlocking {
-                val insertPopular = mDao.insertMovie(it)
-                Log.d("OVM", "Value Popular Saved : ${insertPopular.size}")
+                launch(Dispatchers.IO) {
+                    val insertPopular = mDao.insertMovie(it)
+                    Log.d("OVM", "Value Popular Saved : ${insertPopular.size}")
+                }
             }
         }
     }
 
     override fun requestErrorPopular(msn: String) {
         TODO("Not yet implemented")
+    }
+
+    fun onCleared(){
+        servicePopularMovies.onCleared()
+        serviceTopMovies.onCleared()
     }
 }

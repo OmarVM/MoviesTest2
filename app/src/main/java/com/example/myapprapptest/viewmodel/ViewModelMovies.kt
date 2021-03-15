@@ -28,4 +28,9 @@ class ViewModelMovies : ViewModel() {
             mListPop.postValue(getTopMovies.getPopularMoviesRepo())
         }
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        getTopMovies.onCleared()
+    }
 }
