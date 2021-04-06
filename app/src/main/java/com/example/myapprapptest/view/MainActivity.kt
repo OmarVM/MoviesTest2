@@ -45,6 +45,15 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
             startActivity(searchActivity)
         }
 
+        mViewModelMovies.getData()
+        mViewModelMovies.mListTop.observe(this, { listTopMovies ->
+            adapterTopMovies.updateList(listTopMovies)
+        })
+
+        mViewModelMovies.getDataPopular()
+        mViewModelMovies.mListPop.observe(this, { listPopMovies ->
+            adapterPopMovies.updateList(listPopMovies)
+        })
     }
 
     override fun onClick(movie: Movie) {
@@ -55,18 +64,5 @@ class MainActivity : AppCompatActivity(), IOnClickListener {
             putExtra("mv_img_url", movie.poster_path)
         }
         startActivity(detailsActivity)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mViewModelMovies.getData()
-        mViewModelMovies.mListTop.observe(this, { listTopMovies ->
-            adapterTopMovies.updateList(listTopMovies)
-        })
-
-        mViewModelMovies.getDataPopular()
-        mViewModelMovies.mListPop.observe(this, { listPopMovies ->
-            adapterPopMovies.updateList(listPopMovies)
-        })
     }
 }

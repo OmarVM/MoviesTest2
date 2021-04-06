@@ -6,6 +6,8 @@ import com.example.myapprapptest.repository.database.DaoMovies
 import com.example.myapprapptest.usecases.NetworkPopularListMoviesImpl
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -22,28 +24,17 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
         return arrayListOf()
     }
 
-    suspend fun getTopMoviesRepo(): List<Movie>{
+    suspend fun getTopMoviesRepo() = flow {
         if (mDao.getTopMovies().isNotEmpty()){
-            Log.d("OVM", "fromDB")
-            return mDao.getTopMovies()
-        }
-        serviceTopMovies.setCallbackOperation(this)
-        return serviceTopMovies.getInfo()
-    }
-
-    override fun requestSuccess(movies: List<Movie>) {
-        movies.let {
-            runBlocking {
-                launch(Dispatchers.IO) {
-                    val insertResult = mDao.insertMovie(it)
-                    Log.d("OVM", "Value Saved : ${insertResult.size}")
-                }
+           Log.d("OVM", "Top fromDB")
+           emit(mDao.getTopMovies())
+        }else{
+            serviceTopMovies.getInfo().collect {
+                val insertResult = mDao.insertMovie(it)
+                Log.d("OVM", "Value Top Saved : ${insertResult.size}")
+                emit(it)
             }
         }
-    }
-
-    override fun requestError(msn: String) {
-        TODO("Not yet implemented")
     }
 
     suspend fun getPopularMoviesRepo(): List<Movie>{

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.repository.RepositoryMovie
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,13 +19,16 @@ class ViewModelMovies : ViewModel() {
     var mListPop = MutableLiveData<List<Movie>>()
 
     fun getData(){
-        val getData = viewModelScope.launch(Dispatchers.IO) {
-            mListTop.postValue(getTopMovies.getTopMoviesRepo())
+       viewModelScope.launch(Dispatchers.IO) {
+           getTopMovies.getTopMoviesRepo().collect {
+               mListTop.postValue(it)
+           }
         }
     }
 
+
     fun getDataPopular(){
-        val getData = viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             mListPop.postValue(getTopMovies.getPopularMoviesRepo())
         }
     }
