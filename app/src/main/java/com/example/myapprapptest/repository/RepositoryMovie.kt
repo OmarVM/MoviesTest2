@@ -5,16 +5,14 @@ import com.example.myapprapptest.models.Movie
 import com.example.myapprapptest.repository.database.DaoMovies
 import com.example.myapprapptest.usecases.NetworkPopularListMoviesImpl
 import com.example.myapprapptest.usecases.NetworkTopListMoviesImpl
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
                                           private val serviceTopMovies: NetworkTopListMoviesImpl,
-                                          private val servicePopularMovies: NetworkPopularListMoviesImpl) : ICallbackNetworkOperation{
+                                          private val servicePopularMovies: NetworkPopularListMoviesImpl){
 
     suspend fun getAllMoviesCache(): List<Movie>{
         if (mDao.getAllContent().isNotEmpty()){
@@ -24,6 +22,7 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
         return arrayListOf()
     }
 
+    @ExperimentalCoroutinesApi
     suspend fun getTopMoviesRepo() = flow {
         if (mDao.getTopMovies().isNotEmpty()){
            Log.d("OVM", "Top fromDB")
@@ -37,29 +36,18 @@ class RepositoryMovie @Inject constructor(private val mDao: DaoMovies,
         }
     }
 
-    suspend fun getPopularMoviesRepo(): List<Movie>{
+    @ExperimentalCoroutinesApi
+    suspend fun getPopularMoviesRepo() =  flow {
         if (mDao.getPopularMovies().isNotEmpty()){
             Log.d("OVM", "Popular fromDB")
-            return mDao.getPopularMovies()
-        }
-
-        servicePopularMovies.setCallbackOperation(this)
-        return servicePopularMovies.getInfo()
-    }
-
-    override fun requestSuccessPopular(movies: List<Movie>) {
-        movies.let {
-            runBlocking {
-                launch(Dispatchers.IO) {
-                    val insertPopular = mDao.insertMovie(it)
-                    Log.d("OVM", "Value Popular Saved : ${insertPopular.size}")
-                }
+            emit(mDao.getPopularMovies())
+        }else{
+            servicePopularMovies.getInfo().collect {
+                val insertPopular = mDao.insertMovie(it)
+                Log.d("OVM", "Value Popular Saved : ${insertPopular.size}")
+                emit(it)
             }
         }
-    }
-
-    override fun requestErrorPopular(msn: String) {
-        TODO("Not yet implemented")
     }
 
     fun onCleared(){

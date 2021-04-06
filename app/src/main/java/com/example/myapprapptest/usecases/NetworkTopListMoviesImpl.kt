@@ -8,6 +8,7 @@ import com.example.myapprapptest.repository.network.IAPIMovie
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.sendBlocking
 import kotlinx.coroutines.flow.callbackFlow
@@ -16,6 +17,7 @@ import javax.inject.Inject
 class NetworkTopListMoviesImpl @Inject constructor(private val mService: IAPIMovie) {
     private val disposable = CompositeDisposable()
 
+    @ExperimentalCoroutinesApi
     fun getInfo() = callbackFlow<List<Movie>>{
         disposable.add(
             mService.getMoviesList(
